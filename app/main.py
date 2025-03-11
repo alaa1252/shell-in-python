@@ -19,8 +19,22 @@ def main():
                 print(" ")
             continue
 
+        if len(parts) > 0 and parts[0] == 'type':
+            if len(parts) > 1:
+                print(type(parts[1]))
+            else:
+                print(f"{parts[0]}: command not found")
+            continue
+
         print(f"{command}: command not found")
 
+def type(command):
+    defined = ['exit 0', 'echo']
+    if command in defined:
+        return command + ' is a shell builtin'
+    else:
+        return command + ': not found' 
+    
 
 if __name__ == "__main__":
     main()
