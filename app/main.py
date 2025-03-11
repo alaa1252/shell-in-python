@@ -29,7 +29,7 @@ def main():
         print(f"{command}: command not found")
 
 def type(command):
-    defined = ['exit 0', 'echo', 'type']
+    defined = ['exit', 'echo', 'type']
     if command in defined:
         return command + ' is a shell builtin'
     else:
