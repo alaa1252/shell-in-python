@@ -1,5 +1,5 @@
 import sys
-
+import shutil
 
 def main():
     while(True):
@@ -14,9 +14,13 @@ def main():
 
         if len(parts) > 0 and parts[0] == 'echo':
             if len(parts) > 1:
-                print(" ".join(parts[1:]))
+                excutable_path = find_executable(parts[1])
+                if excutable_path:
+                    print(f"{parts[1]} is {excutable_path}")
+                else:
+                    print(f"{parts[1]}: not found")    
             else:
-                print(" ")
+                print(f"{parts[0]}: command not found")
             continue
 
         if len(parts) > 0 and parts[0] == 'type':
@@ -36,5 +40,7 @@ def type(command):
         return command + ': not found' 
     
 
+def find_executable(command):
+    return shutil.which(command)
 if __name__ == "__main__":
     main()
