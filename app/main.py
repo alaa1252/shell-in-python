@@ -2,7 +2,6 @@ import sys
 import os
 
 def main():
-    print("Current PATH:", os.environ["PATH"])
     while(True):
         sys.stdout.write("$ ")
 
