@@ -1,6 +1,5 @@
 import sys
 import os
-
 def main():
     while(True):
         sys.stdout.write("$ ")
@@ -24,6 +23,14 @@ def main():
                 print(my_type(parts[1]))
             else:
                 print(f"{parts[0]}: command not found")
+            continue
+
+        ex = parts[0]
+
+        if len(parts) > 0 and ex != None:
+            os.system(parts[0])
+        else:
+            print(f"{parts[0]}: command not found")
             continue
 
         print(f"{command}: command not found")
