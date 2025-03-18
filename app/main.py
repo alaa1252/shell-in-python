@@ -54,7 +54,7 @@ def my_execute(parts):
     exe = find_executable(parts[0])
     if exe:
         try:
-            subprocess.run(parts, shell=True)
+            subprocess.run([exe] + parts[1:], check=True)
         except Exception as err:
             print(f" Erorr excuting {parts}: {err}")
     else:
