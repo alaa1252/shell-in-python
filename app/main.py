@@ -1,12 +1,14 @@
 import sys
-import os
+import shutil
+import subprocess
+
 def main():
     while(True):
         sys.stdout.write("$ ")
 
         command = input()
 
-        if(command == 'exit 0'):
+        if(command == 'exit'):
             break
 
         parts = command.split()
@@ -25,15 +27,7 @@ def main():
                 print(f"{parts[0]}: command not found")
             continue
 
-        ex = parts[0]
-
-        if len(parts) > 0 and ex != None:
-            os.system(parts[0])
-        else:
-            print(f"{parts[0]}: command not found")
-            continue
-
-        print(f"{command}: command not found")
+        my_execute(parts)
 
 def my_type(command):
     defined = ['exit', 'echo', 'type']
@@ -47,13 +41,24 @@ def my_type(command):
     
 
 def find_executable(command):
-    paths = os.environ.get("PATH", "").split(os.pathsep)
-    for path in paths:
-        executable = os.path.join(path, command)
-        if os.path.isfile(executable) and os.access(executable, os.X_OK):
-            return executable
-    return None
+    if shutil.which(command):
+        return shutil.which(command)
+    extensions = ['.exe', '.cmd', '.bat']
+    for ex in extensions:
+        if shutil.which(command + ex):
+            return shutil.which(command + ex)
 
+    return None    
+
+def my_execute(parts):
+    exe = find_executable(parts[0])
+    if exe:
+        try:
+            subprocess.run(parts, shell=True)
+        except Exception as err:
+            print(f" Erorr excuting {parts}: {err}")
+    else:
+        print(f"{parts[0]}: command not found")
 
 if __name__ == "__main__":
     main()
