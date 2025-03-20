@@ -5,6 +5,7 @@ import subprocess
 def main():
     while(True):
         sys.stdout.write("$ ")
+        sys.stdout.flush()
 
         command = input()
 
@@ -51,14 +52,18 @@ def find_executable(command):
     return None    
 
 def my_execute(parts):
-    exe = find_executable(parts[0])
+    if not parts:
+        return
+    
+    prog_name = parts[0]
+    exe = find_executable(prog_name)
     if exe:
         try:
-            subprocess.run([exe] + parts[1:], check=True)
+            subprocess.run([prog_name] + parts[1:], env=None, check=False)
         except Exception as err:
-            print(f" Erorr excuting {parts}: {err}")
+            print(f" Erorr excuting {prog_name}: {err}")
     else:
-        print(f"{parts[0]}: command not found")
+        print(f"{prog_name}: command not found")
 
 if __name__ == "__main__":
     main()
