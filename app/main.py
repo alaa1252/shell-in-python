@@ -9,7 +9,7 @@ def main():
 
         command = input()
 
-        if(command == 'exit'):
+        if(command == 'exit 0'):
             break
 
         parts = command.split()
