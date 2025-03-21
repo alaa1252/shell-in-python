@@ -1,6 +1,7 @@
 import sys
 import shutil
 import subprocess
+import os
 
 def main():
     while(True):
@@ -26,6 +27,10 @@ def main():
                 print(my_type(parts[1]))
             else:
                 print(f"{parts[0]}: command not found")
+            continue
+
+        if len(parts) > 0 and parts[0] == 'pwd':
+            print(os.getcwd())
             continue
 
         my_execute(parts)
