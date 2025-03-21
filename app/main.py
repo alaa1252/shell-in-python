@@ -36,7 +36,7 @@ def main():
         my_execute(parts)
 
 def my_type(command):
-    defined = ['exit', 'echo', 'type']
+    defined = ['exit', 'echo', 'type', 'pwd']
     path = find_executable(command)
     if command in defined:
         return command + ' is a shell builtin'
