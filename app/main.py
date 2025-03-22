@@ -33,6 +33,10 @@ def main():
             print(os.getcwd())
             continue
 
+        if len(parts) > 0 and parts[0] == 'cd':
+            my_cd(parts)
+            continue
+
         my_execute(parts)
 
 def my_type(command):
@@ -69,6 +73,13 @@ def my_execute(parts):
             print(f" Erorr excuting {prog_name}: {err}")
     else:
         print(f"{prog_name}: command not found")
+
+def my_cd(command):
+    path = command[1:]
+    if(os.path.exists(path)):
+        os.chdir(path)
+    else:
+        print('cd: ' + path + ': No such file or directory')       
 
 if __name__ == "__main__":
     main()
