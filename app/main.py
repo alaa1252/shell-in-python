@@ -75,8 +75,12 @@ def my_execute(parts):
         print(f"{prog_name}: command not found")
 
 def my_cd(command):
-    path = command[1:]
-    if(os.path.exists(path)):
+    if len(command) < 2:
+        home = os.path.expanduser("~")
+        os.chdir(home)
+        return 
+    path = command[1]
+    if(os.path.exists(path) and os.path.isdir(path)):
         os.chdir(path)
     else:
         print('cd: ' + path + ': No such file or directory')       
