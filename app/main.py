@@ -75,7 +75,7 @@ def my_execute(parts):
         print(f"{prog_name}: command not found")
 
 def my_cd(command):
-    if len(command) < 2:
+    if len(command) < 2 or command[1] == '~':
         home = os.path.expanduser("~")
         os.chdir(home)
         return 
