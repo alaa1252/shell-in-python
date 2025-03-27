@@ -2,6 +2,7 @@ import sys
 import shutil
 import subprocess
 import os
+import shlex
 
 def main():
     while(True):
@@ -13,7 +14,7 @@ def main():
         if(command == 'exit 0'):
             break
 
-        parts = command.split()
+        parts = shlex.split(command)
 
         if len(parts) > 0 and parts[0] == 'echo':
             if len(parts) > 1:
